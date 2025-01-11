@@ -25,17 +25,12 @@ print(int(money - int(2.5 * 38))) """
 
 # E
 """ 
-cost = int(input())
-weight = int(input())
-money = int(input())
+cost, weight, money = int(input()), int(input()), int(input())
 print(int(money - cost * weight)) """
 
 # F вывод с помощью f-строк 
 """ 
-name = input()
-cost = int(input())
-weight = int(input())
-money = int(input())
+name, cost, weight, money = input(), int(input()), int(input()), int(input())
 
 print("Чек")
 print(f"{name} - {weight}кг - {cost}руб/кг")
@@ -52,16 +47,13 @@ print("Купи слона!\n" * N)
 
 # H 
 """ 
-N = int(input())
-string = input()
+N, string = int(input()), input()
 print(f"Я больше никогда не буду писать \"{string}\"!\n" * N) """
 
 # I 
 """ 
-N = int(input())
-M = int(input())
-sausage = int(1 / 2 * N * M)
-print(sausage) """
+N, M = int(input()), int(input())
+print(int(N * M // 2)) """
 
 # J
 """ 
@@ -88,7 +80,19 @@ print(int(number1))
 
 # L 
 # вычленить все цифры числа
-""" number1 = int(input())
+""" 
+number1, number2 = input(), input()
+if len(number2) > len(number1): 
+    number1, number2 = number2, number1
+
+if len(number1) > len(number2):
+    number2 = "0" * (len(number1) - len(number2)) + number2
+
+print("".join(map(lambda x, y: str((int(x) + int(y)) % 10), number1, number2)))
+"""
+"""
+# второй способ
+number1 = int(input())
 b1 = number1 // 100
 c1 = number1 // 10 % 10
 d1 = number1 % 10
@@ -106,76 +110,48 @@ print(int(b + c + d)) """
 
 # M 
 """ 
-children = int(input())
-sweets = int(input())
+children, sweets = int(input()), int(input())
+print(sweets // children)
+print(sweets % children)  # остаток"""
 
-sweet_every = sweets // children
-residue = sweets % children
-
-print(sweet_every)
-print(residue)
- """
 # N 
 """ 
-r = int(input())
-g = int(input())
-b = int(input())
-res = r + b + 1
-print(res) """
+r, g, b = int(input()), int(input()), int(input())
+print(r + b + 1) """
 
 # O
 """ 
-N = int(input()) # часы
-M = int(input()) # минуты 
-T = int(input())
-
+N, M, T = int(input()), int(input()), int(input())
 min = (T % 60 + M) % 60
-# (52+15)// 60
 hours = (T // 60 + N + (T % 60 + M) // 60) % 24
-if (hours < 10 and min < 10):
-    print(f"0{hours}:0{min}")
-elif (hours < 10):
-    print(f"0{hours}:{min}")
-elif (min < 10):
-    print(f"{hours}:0{min}")
-else:
-    print(f"{hours}:{min}")
+print(f"{hours:0>2}:{min:0>2}")
+# (52+15)// 60
  """
 # P 
 # вывод с округлением до сотых 
 # до второго знака после запятой 
 """ 
-A = int(input())
-B = int(input())
-C = int(input())
-
+A, B, C = int(input()), int(input()), int(input())
 print(f"{(B - A) / C:.2f}")
  """
 
 # Q 
 # 1101 = 13
 """ 
-before = int(input())
-binary_value = input()
-last = int(binary_value, 2)
-print(before + last)
- """
+sum_before, binary_value = int(input()), int(input(), 2)
+print(sum_before + binary_value)
+"""
 
 # R 
 """ 
-binary_value = input()
-bill = int(input())
-
-surrender = bill - int(binary_value, 2)
-print(surrender) """
+binary_value, bill = input(), int(input())
+print(bill - int(binary_value, 2)) """
 
 # S Украшение чека
 """ 
-name = input()
-cost = int(input())
-weight = int(input())
-money = int(input())
-print("=" * 16, "Чек", "=" * 16, sep="")
+name, cost, weight, money = input(), int(input()), int(input()), int(input())
+
+print(f"{'Чек':=^35}")
 print(f"Товар:{f'{name}': >29}")
 print(f"Цена: {f'{weight}кг * {cost}руб/кг': >29}")
 print(f"Итого: {f'{cost * weight}руб': >28}")
@@ -184,13 +160,14 @@ print(f"Сдача: {f'{int(money - cost * weight)}руб': >28}")
 print("=" * 35) """
 
 # T котлеты 
-# K2 < K1 
 """ 
-# помоечка
-# weight1 = int((N * M - K2 * (N - weight1)) / K1)
-# weight2 = N - weight1 """
-
-""" 
+N, M, K1, K2 = int(input()), int(input()), int(input()), int(input())
+weight1 = (N * M - K2 * N) // (K1 - K2)
+weight2 = N - weight1
+print(weight1, weight2)
+"""
+# решение на основе матричной записи СЛАУ
+"""  
 import numpy as np 
 from scipy.linalg import solve
 
@@ -207,4 +184,4 @@ A = np.array(
 )
 b = np.array([N * M, N]).reshape((2, 1))
 w = solve(A, b)
-print(round(*w[0]), round(*w[1]), sep=' ') """
+print(int(*w[0]), int(*w[1]), sep=' ') """
