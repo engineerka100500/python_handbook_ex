@@ -153,3 +153,50 @@ if n and m:
                 num = (j + 1) * n - i
             print(f"{num:>{width}}", end=' ')
         print() 
+    
+# P Редизайн таблицы умножения
+n, width = int(input()), int(input())
+length = n * width + (n - 1)
+
+for i in range(n):
+    for j in range(n): 
+        print(f"{((i + 1) * (j + 1)): ^{width}}", end='')
+        if j == n - 1: 
+            print()
+        else:
+            print('|', end='')
+    if i + 1 != n:
+        print('-' * length) 
+
+# Q А роза упала на лапу Азора 3.0
+cnt = 0 
+for i in range(int(input())):
+    (palindrom := True) if (text := input()) == text[::-1] else (palindrom := False)
+    if palindrom:
+        cnt += 1
+print(cnt)
+
+# R Новогоднее настроение 2.0
+
+# S Числовой квадрат
+n = int(input())
+width = len(str((n + 1) // 2))
+for i in range(n):
+    for j in range(n):
+        print(f'{min(i + 1, j + 1, n - i, n - j):>{width}}', end=' ')
+    print()
+
+# T Математическая выгода
+numb = int(input())
+max = 0 
+number_base = 2
+for base in range(10, 2, -1):
+    sum = 0 
+    temp = numb
+    while temp: 
+        sum += (temp % base)
+        temp //= base
+    if sum >= max:
+        max = sum 
+        number_base = base
+print(number_base)
