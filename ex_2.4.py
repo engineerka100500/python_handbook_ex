@@ -33,6 +33,17 @@ for i in range(n):
         numb //= 10
 print(sum)
 
+# E Зайка — 5
+n = int(input())
+cnt = 0
+for i in range(n):
+    one_cnt = False
+    while (word := input()) != 'ВСЁ':
+        if "зайка" in word and one_cnt is False:
+            cnt += 1
+            one_cnt = True
+print(f"{cnt}")
+
 # F НОД 2.0
 n = int(input())
 b = 0
