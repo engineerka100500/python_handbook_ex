@@ -326,3 +326,19 @@ for toy in sorted(toys):
         print(toy)
         
 # T Простая задача 4.0
+
+natural = dict()
+numb = sorted(list(map(int, input().split("; "))))
+
+for i in range(len(numb)):
+    for j in range(i, len(numb)):
+        a, b = numb[i], numb[j]
+        while b > 0:
+            a = a % b
+            a, b = b, a
+        if a == 1:
+            natural[numb[i]] = natural.get(numb[i], []) + [numb[j]]
+            natural[numb[j]] = natural.get(numb[j], []) + [numb[i]]
+
+for num in sorted(natural):
+    print(f"{num} - {', '.join(map(str, sorted(set(natural[num]))))}")
