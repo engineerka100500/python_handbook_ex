@@ -162,3 +162,167 @@ for char in input():
     trans_txt += char
 
 print(trans_txt)
+
+# K Однофамильцы
+
+surnames = dict()
+str_number = 0
+for _ in range(int(input())):
+    surname = input()
+    surnames[surname] = surnames.get(surname, []) + [str_number]
+    str_number += 1
+namesakes_cnt = 0 
+for surname in surnames:
+    if len(surnames[surname]) > 1:
+        namesakes_cnt += len(surnames[surname])
+
+print(namesakes_cnt)
+
+# L Однофамильцы — 2
+
+surnames = dict()
+str_number = 0
+for _ in range(int(input())):
+    surname = input()
+    surnames[surname] = surnames.get(surname, 0) + 1
+print_flag = False
+
+for surname in sorted(surnames):
+    if surnames[surname] - 1:
+        print(f"{surname} - {surnames[surname]}")
+        print_flag = True
+if not print_flag:
+    print("Однофамильцев нет")
+
+# M Дайте чего-нибудь новенького!
+
+N = int(input())
+menu = []
+for _ in range(N):
+    menu.extend(input().split('\n'))
+M = int(input())
+for _ in range(M):
+    for _ in range(int(input())):
+        if (meal := input()) in menu: 
+            menu.remove(meal)
+
+if len(menu) != 0:
+    for meal in sorted(menu):
+        print(meal)
+else:
+    print("Готовить нечего")
+
+# N Это будет шедевр!
+
+products = []
+menu = []
+recipes = dict()
+
+N = int(input())
+
+for _ in range(N):
+    products.extend(input().split('\n'))
+
+for _ in range(int(input())):
+    meal = input()
+    ingr = []
+    for _ in range(int(input())):
+        ingr.extend(input().split('\n'))
+    recipes[meal] = recipes.get(meal, []) + ingr
+
+for meal in recipes:
+    if (set(recipes[meal]) & set(products) == set(recipes[meal])):
+        menu.append(meal)
+        
+if len(menu) != 0: 
+    for meal in sorted(menu):
+        print(meal)
+else:
+    print("Готовить нечего")
+
+# O Двоичная статистика!
+
+numbers = input().split()
+numb_structure = dict()
+print_struct = []
+
+for numb in numbers:
+    units = 0
+    zeros = 0
+    number = f'{bin(int(numb))[2:]}' 
+
+    numb_structure['digits'] = number.count('1') + number.count('0')
+    numb_structure['units'] = number.count('1')
+    numb_structure['zeros'] = number.count('0')
+    print_struct.append(numb_structure.copy())
+
+print(print_struct)
+
+# P Зайка — 10
+
+near = []
+
+while (words := input().split()) != []:
+    if len(words) > 1 and 'зайка' in words:
+        for i in range(len(words)):
+            if words[i] == 'зайка':
+                if i == 0:
+                    near.append(words[1])
+                elif i == (len(words) - 1):
+                    near.append(words[-2])
+                else:
+                    near.append(words[i - 1])
+                    near.append(words[i + 1])
+
+for element in set(near):
+    print(element)
+
+# Q Друзья друзей
+
+friends = dict()
+friends_2_lvl = dict()
+
+while (couple := input()) != '':
+    fr1, fr2 = couple.split()
+    friends[fr1] = friends.get(fr1, set()) | set([fr2])
+    friends[fr2] = friends.get(fr2, set()) | set([fr1])
+
+for surname in sorted(friends):
+    for element in friends[surname]:
+        friends_2_lvl[surname] = friends_2_lvl.get(surname, set()) | friends[element]
+
+for surname in friends_2_lvl:
+    friends_2_lvl[surname] -= friends[surname]
+    friends_2_lvl[surname].remove(surname)
+    print(f"{surname}: {', '.join(sorted(friends_2_lvl[surname]))}")
+
+# R Карта сокровищ
+
+treasures = dict()
+
+for _ in range(int(input())):
+    x, y = input().split()
+    key = int(x) // 10, int(y) // 10
+    treasures[key] = treasures.get(key, 0) + 1
+
+print(max(treasures.values()))
+
+# S Частная собственность
+
+toys = []
+toy_cnt = dict()
+
+for _ in range(int(input())):
+    name, str = input().split(': ')
+    toys.extend(set(str.split(', ')))
+
+for toy in toys:
+    if toy not in toy_cnt:
+        toy_cnt[toy] = 0
+    toy_cnt[toy] += 1
+
+for toy in sorted(toys):
+    if toy_cnt[toy] == 1:
+        print(toy)
+        
+# T Простая задача 4.0
